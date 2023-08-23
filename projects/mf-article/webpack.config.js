@@ -7,6 +7,9 @@ module.exports = {
     uniqueName: 'mf-article',
     scriptType: 'text/javascript',
   },
+  optimization: {
+    runtimeChunk: false,
+  },
   plugins: [
     new ModuleFederationPlugin({
       name: 'article',

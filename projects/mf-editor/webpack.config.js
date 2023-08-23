@@ -7,6 +7,9 @@ module.exports = {
     uniqueName: 'mf-editor',
     scriptType: 'text/javascript',
   },
+  optimization: {
+    runtimeChunk: false,
+  },
   plugins: [
     new ModuleFederationPlugin({
       name: 'editor',

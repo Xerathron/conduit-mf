@@ -7,6 +7,9 @@ module.exports = {
     uniqueName: 'mf-authentication',
     scriptType: 'text/javascript',
   },
+  optimization: {
+    runtimeChunk: false,
+  },
   plugins: [
     new ModuleFederationPlugin({
       name: 'authentication',
