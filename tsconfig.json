@@ -16,6 +16,8 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "noImplicitAny": false,
+    "strictPropertyInitialization": false,
     "paths": {
       "shared": [
         "dist/shared"
