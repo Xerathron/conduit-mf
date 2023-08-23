@@ -1,5 +1,5 @@
 /*
- * Public API Surface of mdmf-shared
+ * Public API Surface of mf-shared
  */
 
 export * from './lib/interceptors/index';

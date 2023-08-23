@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve"
+    "start": "ng serve shell &  ng serve mf-home &  ng serve mf-authentication &  ng serve mf-article &  ng serve mf-editor &  ng serve mf-profile &  ng serve mf-settings"
   },
   "private": true,
   "dependencies": {
