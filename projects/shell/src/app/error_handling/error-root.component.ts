@@ -6,4 +6,8 @@ import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
   styleUrls: ["./error-root.component.scss"],
 })
 export class ErrorRootComponent {
+
+  constructor(
+  ) {}
+
 }
