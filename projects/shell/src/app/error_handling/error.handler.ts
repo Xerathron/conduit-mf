@@ -1,5 +1,7 @@
 import { ErrorHandler, Inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { MfLoadError } from "../models/mf-error-load.model";
+import { ErrorRouterService } from "../services/error-router.service";
 
 export const MF_ERROR_LOAD_TOKEN = "mf-error-load";
 
@@ -16,6 +18,7 @@ export const MF_ERROR_LOAD_TOKEN = "mf-error-load";
 export class CustomErrorHandler implements ErrorHandler {
   constructor(
     private router: Router,
+    private errorRouter: ErrorRouterService,
   ) {}
 
   /**
@@ -30,5 +33,20 @@ export class CustomErrorHandler implements ErrorHandler {
       console.error("Unknown error occurred: " + error);
       return;
     }
+
+    this.routeNext(error.rejection);
+  }
+
+  /**
+   * Determine the error route and navigate to it
+   * Saves the given error to the local storage
+   *
+   * @param error containing additional information about the error cause
+   */
+  private routeNext(error: MfLoadError) {
+    const route = this.errorRouter.getRoute(error.reason);
+    error.route = route;
+
+    this.router.navigate([route.path]);
   }
 }
