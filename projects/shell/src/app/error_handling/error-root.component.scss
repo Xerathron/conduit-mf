@@ -1,0 +1,23 @@
+.error-container {
+    background-color: #ddd;
+
+    border-radius: .2em;
+    border: #666 1px solid;
+    padding: 4em;
+}
+
+:host ::ng-deep {
+    .error-title {
+        font-size: 2.3em;
+        text-align: center;
+        margin-bottom: .4em;
+    }
+
+    .error-action-btn {
+        float: right;
+    }
+
+    .error-back-btn {
+        float: left;
+    }
+}
