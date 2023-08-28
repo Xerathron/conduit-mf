@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { SharedModule } from 'shared';
 import { MicroFrontendRouteFactory } from './factory/micro-frontend-route.factory';
+import { ErrorModule } from './error_handling/error.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { MicroFrontendRouteFactory } from './factory/micro-frontend-route.factor
   imports: [
     SharedModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ErrorModule
   ],
   providers: [
     {

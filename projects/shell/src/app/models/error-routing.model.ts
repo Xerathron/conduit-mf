@@ -23,15 +23,20 @@ export type ErrorKeys = AxiosErrorKeys | WebpackErrorKeys;
  * Generic ErrorMap that can be filled with either
  * {@link AxiosErrorKeys} or {@link WebpackErrorKeys}
  */
-export type ErrorRouteMapType<T extends ErrorKeys> = Partial<
-  Record<T, ErrorRoute>
+export type ErrorComponentMapType<T extends ErrorKeys> = Partial<
+  Record<T, ErrorComponent>
 >;
 
-export type ErrorRoute = {
-  errorHandler: ErrorHandlingComponent;
-  recovery?: RecoveryComponent | any; // actually just RecoveryComponent but this wont work with typescript 
+export type RecoveryContainer = {
+  component: RecoveryComponent | any; // actually just RecoveryComponent but this wont work with typescript
+  button_name: string
+}
+
+export type ErrorComponent = {
+  errorComponent: ErrorHandlingComponent;
+  recovery?: RecoveryContainer,
   path?: string;
 };
 
 
-export type MergedErrorMap = ErrorRouteMapType<AxiosErrorKeys & WebpackError>;
+export type MergedErrorMap = ErrorComponentMapType<AxiosErrorKeys & WebpackError>;

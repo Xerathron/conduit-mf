@@ -1,5 +1,26 @@
 <div class="container">
   <div class="offset-2 col-8 error-container">
     <router-outlet></router-outlet>
+
+
+    <ng-container *ngIf="recovery">
+      <ng-container *ngComponentOutlet="recovery.component; injector: injector">
+      </ng-container>
+    </ng-container>
+
+
+    <button class="btn btn-secondy error-back-btn" (click)="goBack()">
+      Go back
+    </button>
+    <button
+      *ngIf="recovery"
+      class="btn btn-primary error-action-btn"
+      (click)="recover()"
+      [disabled]="(recoveryStatus$ | async) === RecoveryEvent.START"
+    >
+
+      <span *ngIf="(recoveryStatus$ | async) !== RecoveryEvent.START; else reconnection">{{ recovery.button_name }}</span>
+      <ng-template #reconnection>Reconnecting</ng-template>
+    </button>
   </div>
 </div>

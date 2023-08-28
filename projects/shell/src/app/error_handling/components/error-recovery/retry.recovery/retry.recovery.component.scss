@@ -1,0 +1,16 @@
+.progress-bar {
+  height: 2px;
+  background-color: white;
+}
+
+.progress-bar {
+  transition: width 0.2s ease-in-out;
+  background-color: #5cb85c;
+  height: 100%;
+  color: white;
+  text-align: center;
+}
+
+.progress-value {
+  line-height: 2px;
+}

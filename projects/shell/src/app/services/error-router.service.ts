@@ -2,11 +2,11 @@ import { Injectable, OnInit } from "@angular/core";
 import { Route } from "@angular/router";
 import {
   ErrorKeys,
-  ErrorRoute,
+  ErrorComponent,
   MergedErrorMap,
 } from "../models/error-routing.model";
 import { Reason } from "../models/mf-error-load.model";
-import { RawErrorMap } from "../utils/error-2-route.map";
+import { RawErrorMap } from "../utils/error-2-component.map";
 import { ErrorRoutes } from "../utils/error-routing.table";
 import { GenericErrorComponent } from "../error_handling/components/error-handling/generic-error-component/generic-error.component";
 import { RecoveryComponent } from "../models/error-handler.model";
@@ -19,8 +19,8 @@ export class ErrorRouterService {
   private readonly prefix = ErrorRoutes[0].path + "/";
   private ErrorRouteMap: MergedErrorMap;
 
-  private readonly genericRoute: ErrorRoute = {
-    errorHandler: GenericErrorComponent,
+  private readonly genericRoute: ErrorComponent = {
+    errorComponent: GenericErrorComponent,
     path: this.prefix,
   };
 
@@ -33,13 +33,13 @@ export class ErrorRouterService {
    * The routing table is {@link ErrorRouteMap}
    *
    * @Note If the route doesn't exist in the table fallback
-   * to a generic error message that is contained in the 
+   * to a generic error message that is contained in the
    * {@link ErrorRootComponent}
    *
    * @param reason reason object why the error occurred
    * @returns error route appended by a root path prefix
    */
-  getRoute(reason: Reason): ErrorRoute {
+  getRoute(reason: Reason): ErrorComponent {
     return this.ErrorRouteMap[reason.code] || this.genericRoute;
   }
 
@@ -76,15 +76,15 @@ export class ErrorRouterService {
    * @param route route
    * @returns resolved path as string
    */
-  private resolvePath(route: ErrorRoute): string {
+  private resolvePath(route: ErrorComponent): string {
     const staticRoute = ErrorRoutes[0].children.find(
-      (_route: Route) => _route.component === route.errorHandler
+      (_route: Route) => _route.component === route.errorComponent
     );
 
     if (!staticRoute) {
       throw Error(
         "The " +
-          route.errorHandler +
+          route.errorComponent +
           " component is defined in the ErrorRouteMap but not in the ErrorRoutes. Add the component there as a new children."
       );
     }

@@ -1,0 +1,8 @@
+<span *ngIf="eventStatus !== recoveryEvent.START; else load_text">Reconnection in {{ countdownTime }}</span>
+<ng-template #load_text>
+  <span>Try reconnecting...</span>
+</ng-template>
+
+<div class="progress-bar m-b-1" [style.width.%]="percentageProgress">
+  <div class="progress-value">&nbsp;</div>
+</div>

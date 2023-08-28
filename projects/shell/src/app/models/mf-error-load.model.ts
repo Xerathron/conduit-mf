@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { ErrorRoute } from "./error-routing.model";
+import { ErrorComponent } from "./error-routing.model";
 import { MicroFrontend } from "./micro-frontend.model";
 
 export enum WebpackError {
@@ -10,7 +10,7 @@ export enum WebpackError {
 export class WebpackException implements Reason, Error {
   public message: string;
   public name: string;
-  
+
   constructor(public error: Error, public code: WebpackError) {
     this.message = error.message;
     this.name = error.name;
@@ -20,7 +20,7 @@ export class WebpackException implements Reason, Error {
 export declare type ErrorType = typeof WebpackException | typeof AxiosError;
 
 /**
- * Gives the cause of the thrown error 
+ * Gives the cause of the thrown error
  */
 export interface Reason extends Error {
   code: string,
@@ -43,5 +43,5 @@ export interface MfLoadError {
    */
   reason: Reason;
 
-  route?: ErrorRoute; 
+  route?: ErrorComponent;
 }

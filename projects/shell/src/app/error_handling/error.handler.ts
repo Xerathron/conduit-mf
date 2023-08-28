@@ -3,8 +3,7 @@ import { Router } from "@angular/router";
 import { LOCAL_STORAGE, StorageService } from "ngx-webstorage-service";
 import { MfLoadError } from "../models/mf-error-load.model";
 import { ErrorRouterService } from "../services/error-router.service";
-
-export const MF_ERROR_LOAD_TOKEN = "mf-error-load";
+import { MF_ERROR_LOAD_TOKEN } from "../token/error.token";
 
 /**
  * Catches errors on lazy loading

@@ -15,10 +15,10 @@ export class RetryRecoveryService implements RecoveryService {
 
   /**
    * Tries to reload the latest page that causes an error.
-   * It assumes that something external has changed e.g. 
-   * the network connection has been reestablished or 
+   * It assumes that something external has changed e.g.
+   * the network connection has been reestablished or
    * the server is available again.
-   * 
+   *
    * @returns Promise that resolves true on success and false on failure
    */
   public recover(): Promise<boolean> {
