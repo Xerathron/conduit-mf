@@ -1,5 +1,5 @@
 import { LoadRemoteModuleOptions } from "../models/micro-frontend.model";
-import axios from 'axios'; 
+import axios from 'axios';
 import { AXIOS_CONFIG } from "./axios.config";
 
 type Scope = unknown;
@@ -15,12 +15,12 @@ declare const __webpack_share_scopes__: { default: Scope };
 
 /**
  * Inserts code in a new <script> tag on the bottom of the document
- * 
- * The code will be execute immediately after resolve 
+ *
+ * The code will be execute immediately after resolve
  */
 const loadScript = (code: any): Promise<void> => {
   return new Promise((resolve) => {
-    const script = document.createElement('script'); 
+    const script = document.createElement('script');
     script.type = "text/javascript";
     script.appendChild(document.createTextNode(code));
     document.body.appendChild(script);
@@ -33,11 +33,11 @@ const moduleMap = {};
 
 /**
  * Loads a micro frontend by the remote entry point.
- * 
+ *
  * Rejects if something went wrong
- * 
+ *
  * @param remoteEntry Webpack's entry point to retrieve code from remote
- * @returns 
+ * @returns
  */
 const loadRemoteEntry = async(remoteEntry: string): Promise<void> => {
   if (moduleMap[remoteEntry]) {

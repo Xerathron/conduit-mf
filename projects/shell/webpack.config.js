@@ -26,6 +26,10 @@ module.exports = {
         "@angular/common": { singleton: true, eager: true, strictVersion: true, requiredVersion: '16.0.1' },
         "@angular/common/http": { singleton: true, eager: true, strictVersion: true, requiredVersion: '16.0.1' },
         '@angular/router': { eager: true, singleton: true },
+        'shared': {
+          import: 'shared',
+          requiredVersion: require('../shared/package.json').version,
+        },
       },
     }),
   ],

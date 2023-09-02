@@ -1,18 +1,26 @@
-import { Component, EventEmitter, Inject, Injector, NgZone, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Injector,
+  NgZone,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
-import { Subject, take } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { RecoveryEvent } from '../models/error-event-model';
 import { RecoveryComponent } from '../models/error-handler.model';
 import { MF_ERROR_LOAD_TOKEN } from '../token/error.token';
 import { RecoveryContainer } from '../models/error-routing.model';
 
-export const EVENT_TOKEN = 'event_token'
+export const EVENT_TOKEN = 'event_token';
 
 export interface EventTokenValue {
-  trigger: Subject<any>,
-  recoveryEvent: EventEmitter<RecoveryEvent>
+  trigger: Subject<any>;
+  recoveryEvent: EventEmitter<RecoveryEvent>;
 }
 
 @Component({
@@ -29,6 +37,8 @@ export class ErrorRootComponent implements OnInit, OnDestroy {
   public recovery: RecoveryContainer | any;
   public injector: Injector;
 
+  private destroy$ = new Subject<void>();
+
   private recoveryEvent$ = new EventEmitter<RecoveryEvent>();
 
   constructor(
@@ -41,6 +51,7 @@ export class ErrorRootComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.injector = this.createInjector();
     this.resolveRecoveryComponent();
+    this.registerRecoveryStatusListener();
   }
 
   /**
@@ -51,14 +62,21 @@ export class ErrorRootComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     this.storage.remove(MF_ERROR_LOAD_TOKEN);
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   recover() {
     this.recoveryStatus$.next(RecoveryEvent.START);
-    debugger;
-    this.recovery.component.recoveryService.recover().then((success) => {
-      const status = success ? RecoveryEvent.SUCCESS : RecoveryEvent.FAILURE;
-      this.recoveryStatus$.next(status);
+    this.triggerRecovery$.next();
+  }
+
+  private registerRecoveryStatusListener() {
+    this.recoveryEvent$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((event) => {
+        const status = event ? RecoveryEvent.SUCCESS : RecoveryEvent.FAILURE;
+        this.recoveryStatus$.next(status);
     });
   }
 
@@ -79,13 +97,15 @@ export class ErrorRootComponent implements OnInit, OnDestroy {
 
   private createInjector(): Injector {
     return Injector.create({
-      providers: [{
-        provide: EVENT_TOKEN,
-        useValue: {
-          trigger: this.triggerRecovery$,
-          recoveryEvent: this.recoveryEvent$
-        } as EventTokenValue
-      }],
-    })
+      providers: [
+        {
+          provide: EVENT_TOKEN,
+          useValue: {
+            trigger: this.triggerRecovery$,
+            recoveryEvent: this.recoveryEvent$,
+          } as EventTokenValue,
+        },
+      ],
+    });
   }
 }

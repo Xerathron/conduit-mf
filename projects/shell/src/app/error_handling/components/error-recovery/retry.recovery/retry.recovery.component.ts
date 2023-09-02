@@ -42,7 +42,7 @@ export class RetryRecoveryComponent implements OnInit, OnDestroy, RecoveryCompon
 
   ngOnInit(): void {
     this.newTimer();
-    this.setEventListener();
+    this.setListeners();
   }
 
   ngOnDestroy(): void {
@@ -65,6 +65,7 @@ export class RetryRecoveryComponent implements OnInit, OnDestroy, RecoveryCompon
 
     const interval = 100; // in ms
     this.timer$ = timer(1, interval)
+      .pipe(takeUntil(this.destroy$))
       .pipe(take(this.reconnectionTime / interval + 1))
       .pipe(map((n) => this.reconnectionTime - n * interval))
       .subscribe({
@@ -73,7 +74,7 @@ export class RetryRecoveryComponent implements OnInit, OnDestroy, RecoveryCompon
       });
   }
 
-  private setEventListener() {
+  private setListeners() {
     this.events.recoveryEvent
       .pipe(takeUntil(this.destroy$))
       .subscribe((event: RecoveryEvent) => {

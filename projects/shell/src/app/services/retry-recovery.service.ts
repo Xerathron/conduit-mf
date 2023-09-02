@@ -31,9 +31,7 @@ export class RetryRecoveryService implements RecoveryService {
         success = false;
       }
 
-      setTimeout(() => {
-        resolve(success);
-      }, 2000);
+      resolve(success);
     });
   }
 }

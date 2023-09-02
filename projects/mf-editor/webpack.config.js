@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
+const deps = require('../../package.json').dependencies;
+
 module.exports = {
   output: {
     publicPath: 'http://localhost:4206/',
@@ -18,11 +20,11 @@ module.exports = {
         EditorModule: './projects/mf-editor/src/app/editor/editor.module.ts',
       },
       shared: {
-        '@angular/core': { singleton: true, eager: true },
-        // bugfix for https://github.com/webpack/webpack/issues/13457
-        "@angular/common": { singleton: true, eager: true, strictVersion: true, requiredVersion: '16.0.1' },
-        "@angular/common/http": { singleton: true, eager: true, strictVersion: true, requiredVersion: '16.0.1' },
-        '@angular/router': { singleton: true, eager: true },
+        ...deps,
+        'shared': {
+          import: 'shared',
+          requiredVersion: require('../shared/package.json').version,
+        },
       },
     }),
   ],

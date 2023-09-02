@@ -15,7 +15,7 @@ export class UserService {
   private currentUserSubject = new BehaviorSubject<User>(null);
   public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable().pipe(distinctUntilChanged());
 
   constructor(private apiService: ApiService, private jwtService: JwtService) {
