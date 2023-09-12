@@ -1,9 +1,10 @@
 import { ErrorHandler, Inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { LOCAL_STORAGE, StorageService } from "ngx-webstorage-service";
-import { MfLoadError } from "../models/mf-error-load.model";
+import { MfLoadError } from "shared";
 import { ErrorRouterService } from "../services/error-router.service";
 import { MF_ERROR_LOAD_TOKEN } from "../token/error.token";
+
 
 /**
  * Catches errors on lazy loading
@@ -23,19 +24,20 @@ export class CustomErrorHandler implements ErrorHandler {
   ) {}
 
   /**
-   * Filters orphan errors and invoke {@link routeNext}
+   * Handles errors by merging different error structure codes to the
+   * same format.
    *
-   * @param error any possible error. Could also contain dev errors
-   * @returns
+   * @param error any error. The structure should look like
+   *  {rejection: {reason: any}} | {reason: any}
    */
-  handleError(error: any) {
-    if (!error.rejection) {
-      // errors that does not belong to any micro-frontend load error
-      console.error("Unknown error occurred: " + error);
-      return;
+  handleError(errorWrapper: any) {
+    let error = errorWrapper.rejection || errorWrapper;
+    if (!error?.reason) {
+      // unknown error or error that does not match the known error structure
+      throw errorWrapper;
     }
 
-    this.routeNext(error.rejection);
+    this.routeNext(error);
   }
 
   /**

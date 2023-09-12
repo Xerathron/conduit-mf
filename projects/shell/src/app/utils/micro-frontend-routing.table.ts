@@ -1,4 +1,4 @@
-import { MicroFrontend } from "../models/micro-frontend.model";
+import { MicroFrontend } from "shared";
 
 /*
  * This is just an hardcoded list of remote microfrontends, but could easily be updated

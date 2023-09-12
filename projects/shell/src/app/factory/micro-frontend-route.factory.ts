@@ -1,7 +1,6 @@
 import { Injectable, OnInit } from "@angular/core";
 import { Router, Routes } from "@angular/router";
-import { MfLoadError } from "../models/mf-error-load.model";
-import { MicroFrontend } from "../models/micro-frontend.model";
+import { MfLoadError, MicroFrontend } from "shared";
 import { loadRemoteModule } from "../utils/micro-frontend-loader.utils";
 import { MicroFrontendRoutingTable } from "../utils/micro-frontend-routing.table";
 

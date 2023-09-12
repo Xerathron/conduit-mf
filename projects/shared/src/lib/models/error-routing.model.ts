@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import { AxiosError, HttpStatusCode } from "axios";
 import { ErrorHandlingComponent, RecoveryComponent, RecoveryService } from "../models/error-handler.model";
 import { WebpackError } from "../models/mf-error-load.model";
 
@@ -8,7 +8,7 @@ import { WebpackError } from "../models/mf-error-load.model";
  * Excludes {@link ErrorConstructor} and {@link AxiosError.from}
  */
 export type AxiosErrorKeys = Exclude<
-  keyof typeof AxiosError,
+  keyof typeof AxiosError | HttpStatusCode,
   keyof ErrorConstructor | "from"
 >;
 

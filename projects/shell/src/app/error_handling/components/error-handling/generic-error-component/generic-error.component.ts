@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ErrorHandlingComponent } from "../../../../models/error-handler.model";
+import { ErrorHandlingComponent } from "shared";
 
 @Component({
   selector: "app-generic-error",

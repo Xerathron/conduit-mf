@@ -1,10 +1,9 @@
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
-import { RecoveryComponent } from "../models/error-handler.model";
+import { RecoveryComponent, MfLoadError } from "shared";
 import { Observable } from "rxjs";
 import { Inject, Injectable } from "@angular/core";
 import { ErrorRouterService } from "../services/error-router.service";
 import { LOCAL_STORAGE } from "ngx-webstorage-service";
-import { MfLoadError } from "../models/mf-error-load.model";
 import { MF_ERROR_LOAD_TOKEN } from "../token/error.token";
 
 @Injectable({

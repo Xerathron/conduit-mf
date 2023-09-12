@@ -37,7 +37,6 @@ export interface MfLoadError {
    */
   targetMf: MicroFrontend;
 
-
   /**
    * Holds an object containing information about the error cause.
    */

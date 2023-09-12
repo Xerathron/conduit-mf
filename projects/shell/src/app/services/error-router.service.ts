@@ -4,12 +4,12 @@ import {
   ErrorKeys,
   ErrorComponent,
   MergedErrorMap,
-} from "../models/error-routing.model";
-import { Reason } from "../models/mf-error-load.model";
+  RecoveryComponent,
+  Reason
+} from "shared";
 import { RawErrorMap } from "../utils/error-2-component.map";
 import { ErrorRoutes } from "../utils/error-routing.table";
 import { GenericErrorComponent } from "../error_handling/components/error-handling/generic-error-component/generic-error.component";
-import { RecoveryComponent } from "../models/error-handler.model";
 
 @Injectable({
   providedIn: "root",
@@ -45,7 +45,7 @@ export class ErrorRouterService {
 
   getRecovery(error: Reason): RecoveryComponent | undefined {
     const key = Object.keys(this.ErrorRouteMap).find(
-      (errorKey: ErrorKeys) => errorKey === error.code
+      (errorKey) => errorKey === error.code
     ) as ErrorKeys;
 
     return this.ErrorRouteMap[key]?.recovery;
@@ -58,7 +58,7 @@ export class ErrorRouterService {
    * @returns final route map
    */
   private fullfilMap(routes: MergedErrorMap): MergedErrorMap {
-    Object.keys(routes).forEach((key: ErrorKeys) => {
+    Object.keys(routes).forEach((key)  => {
       routes[key].path = this.resolvePath(routes[key]);
     });
 

@@ -4,11 +4,11 @@ import { ErrorHandlingComponent, MfLoadError } from "shared";
 import { MF_ERROR_LOAD_TOKEN } from "projects/shell/src/app/token/error.token";
 
 @Component({
-  selector: "app-network-error",
-  templateUrl: "./network-error.component.html",
-  styleUrls: ["./network-error.component.scss"],
+  selector: "app-server-error",
+  templateUrl: "./server-error.component.html",
+  styleUrls: ["./server-error.component.scss"],
 })
-export class NetworkErrorComponent implements OnInit, ErrorHandlingComponent {
+export class ServerErrorComponent implements OnInit, ErrorHandlingComponent {
   public error: MfLoadError;
 
   constructor(

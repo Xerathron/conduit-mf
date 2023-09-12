@@ -1,4 +1,4 @@
-<span *ngIf="eventStatus !== recoveryEvent.START; else load_text">Reconnection in {{ countdownTime }}</span>
+<span *ngIf="eventStatus !== recoveryEvent.START; else load_text">Reconnection in {{ countdownTime }} second<span *ngIf="countdownTime > 1">s</span></span>
 <ng-template #load_text>
   <span>Try reconnecting...</span>
 </ng-template>

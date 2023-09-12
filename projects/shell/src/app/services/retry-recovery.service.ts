@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { LOCAL_STORAGE, StorageService } from "ngx-webstorage-service";
-import { RecoveryService } from "../models/error-handler.model";
+import { RecoveryService } from "shared";
 import { LAST_ROUTE_INDEX } from "../factory/route-reminder.factory";
 
 @Injectable({

@@ -3,7 +3,6 @@ import {
   EventEmitter,
   Inject,
   Injector,
-  NgZone,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -11,10 +10,9 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Subject, take, takeUntil } from 'rxjs';
-import { RecoveryEvent } from '../models/error-event-model';
-import { RecoveryComponent } from '../models/error-handler.model';
+import { RecoveryEvent } from '../../../../shared/src/lib/models/error-event-model';
 import { MF_ERROR_LOAD_TOKEN } from '../token/error.token';
-import { RecoveryContainer } from '../models/error-routing.model';
+import { RecoveryContainer } from 'shared';
 
 export const EVENT_TOKEN = 'event_token';
 

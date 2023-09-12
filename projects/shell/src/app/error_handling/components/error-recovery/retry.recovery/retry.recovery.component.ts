@@ -1,9 +1,9 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { RecoveryEvent } from 'projects/shell/src/app/models/error-event-model';
+import { RecoveryEvent } from 'projects/shared/src/lib/models/error-event-model';
 import { RetryRecoveryService } from 'projects/shell/src/app/services/retry-recovery.service';
 import { Subscription, Subject, timer, take, map, takeUntil } from 'rxjs';
 import { EVENT_TOKEN, EventTokenValue } from '../../../error-root.component';
-import { RecoveryComponent } from 'projects/shell/src/app/models/error-handler.model';
+import { RecoveryComponent } from 'shared';
 
 /**
  * Reconnection time in milliseconds

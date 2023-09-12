@@ -4,3 +4,8 @@ export * from './comment.model';
 export * from './errors.model';
 export * from './profile.model';
 export * from './user.model';
+export * from './error-event-model';
+export * from './error-handler.model';
+export * from './error-routing.model';
+export * from './mf-error-load.model';
+export * from './micro-frontend.model';

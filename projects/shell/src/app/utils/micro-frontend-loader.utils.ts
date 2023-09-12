@@ -1,4 +1,4 @@
-import { LoadRemoteModuleOptions } from "../models/micro-frontend.model";
+import { LoadRemoteModuleOptions } from "shared";
 import axios from 'axios';
 import { AXIOS_CONFIG } from "./axios.config";
 
